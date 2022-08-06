@@ -30,7 +30,7 @@ function pow(x, n) {
 }
 console.log(pow(5, 10));
 // --------------
-
+// recursion
 let students = {
   js: [
     {
@@ -132,4 +132,4 @@ function count(obj) {
 count(students);
 console.log(prog);
 console.log(sum);
-console.log(prog / sum);
+console.log(`${prog / sum} %`);
