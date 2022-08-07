@@ -188,3 +188,32 @@ console.log(mapToObject);
 
 const mapToObject2 = Object.fromEntries(map);
 console.log(mapToObject2);
+
+// -----------
+
+const someArr = ["Alex", "Ann", "John", "Mike", "Ann", "alex", "Alex"];
+
+const set = new Set(someArr);
+set.add("Antony").add("john").add("John");
+console.log(set);
+console.log(set.size);
+console.log(set.keys());
+console.log(set.values());
+
+// universal filter of array
+
+function uniFilter(arr) {
+  return Array.from(new Set(arr));
+}
+console.log(uniFilter(someArr));
+
+// ----------
+
+// bigInt
+
+const bigint = 5n;
+const num = 4;
+
+console.log(bigint + BigInt(num));
+console.log(Number(bigint) + num);
+console.log(Number(3509385098395803948503850830958093850983095809385830958n));
