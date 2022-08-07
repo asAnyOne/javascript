@@ -133,3 +133,58 @@ count(students);
 console.log(prog);
 console.log(sum);
 console.log(`${prog / sum} %`);
+
+// -------------
+// hoisting
+
+console.log(varVar);
+
+var varVar = 50;
+
+console.log(varVar);
+
+// global
+if (1) {
+  var varVar1 = 55;
+}
+console.log(varVar1);
+// -------
+
+const obj = {
+  name: "John",
+  birthDay: "20 / 04 / 2000",
+  [Symbol("id")]: 223,
+};
+console.log(Object.getOwnPropertyDescriptor(obj, "birthDay"));
+console.log(obj);
+Object.defineProperty(obj, "birthDay", {
+  writable: false,
+});
+console.log(Object.getOwnPropertyDescriptor(obj, "birthDay"));
+// {value: '20 / 04 / 2000', writable: false, enumerable: true, configurable: true}
+// delete obj.birthDay;
+
+console.log(obj);
+console.log(Object.entries(obj));
+// --------------
+
+const map = new Map([
+  [{ name: "John" }, 4888],
+  [{ name: "alex" }, 4999],
+]);
+console.log(map);
+map.set(obj, 5999);
+console.log(map);
+
+for (let [obj, value] of map.entries()) {
+  console.log(obj.name, value);
+}
+
+const objToMap = new Map(Object.entries(obj));
+console.log(objToMap);
+
+const mapToObject = Object.fromEntries(objToMap);
+console.log(mapToObject);
+
+const mapToObject2 = Object.fromEntries(map);
+console.log(mapToObject2);
