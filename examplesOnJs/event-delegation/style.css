@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: gray;
+}
+h1 {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+button {
+  position: relative;
+  padding: 20px 70px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  color: black;
+  font-size: 30px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.blue {
+  background-color: lightblue;
+}
+.red {
+  background-color: red;
+}
+.hidden {
+  display: none;
+}
+.big {
+  padding: 30px 50px;
+}
+.wrapper {
+  position: relative;
+  margin-top: 50px;
+  padding: 30px;
+  background-color: rgb(144, 244, 5);
+}
