@@ -101,3 +101,20 @@ console.log(expCount());
 console.log(expCount());
 console.log(count()());
 console.log(count()());
+
+const box = document.querySelector(".box");
+
+let a = "|",
+  timerId = setInterval(() => {
+    if (a) {
+      a = "";
+    } else {
+      a = "|";
+    }
+    box.textContent = `TYPE HERE ! =====>${a}`;
+  }, 500);
+
+box.addEventListener("click", () => {
+  clearInterval(timerId);
+  box.textContent = "|";
+});
