@@ -1,3 +1,5 @@
+"use strict";
+
 // console.log(calc(15, 59));
 // function calc(a, b) {
 //   return a * b;
@@ -118,3 +120,15 @@ box.addEventListener("click", () => {
   clearInterval(timerId);
   box.textContent = "|";
 });
+
+function say(user1, user2, user3) {
+  console.log(`Hello , my name is ${this.name}`);
+  console.log(`hello my name is Henry! ${user1}, ${user2}, ${user3}`);
+}
+
+const user = {
+  name: "Mary",
+};
+say.call(user, "ann", "john", "mike");
+say.apply(user, ["ann", "mike", "john"]);
+say.bind(user)("ann", "mike", "john");
