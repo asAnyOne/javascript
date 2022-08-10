@@ -8,6 +8,7 @@
 body.hidden {
   overflow: hidden;
 }
+
 a {
   text-decoration: none;
 }
@@ -552,7 +553,9 @@ a {
 .footer .call {
   text-align: right;
 }
-
+.modal {
+  display: none;
+}
 .modal.show {
   position: fixed;
   top: 0;
