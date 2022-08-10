@@ -31,23 +31,23 @@ document.addEventListener("DOMContentLoaded", () => {
         (box.scrollTop / (box.scrollHeight - box.clientHeight)) * 100
       ) + " %";
   });
-  navItems[0].style.cssText =
-    "font-weght:bold; font-size:1.5em ;background-color:gray;padding:2px";
-  function scrollTo(endPoint, startPoint) {}
+  function addStyle(elem) {
+    elem.style.cssText =
+      "font-weght:bold; font-size:1.5em ;background-color:gray;padding:2px";
+  }
+  addStyle(navItems[0]);
+
   nav.addEventListener("click", (e) => {
     if (e.target && e.target.tagName === "SPAN") {
-      let index;
       navItems.forEach((item) => {
         item.style = "";
       });
-      box.scrollTo(
-        0,
+      let y =
         paragraphs[e.target.textContent - 1].getBoundingClientRect().y -
-          paragraphs[0].getBoundingClientRect().y +
-          10
-      );
-      e.target.style.cssText =
-        "font-weght:bold; font-size:1.5em ;background-color:gray;padding:2px";
+        paragraphs[0].getBoundingClientRect().y +
+        10;
+      box.scrollTo(0, y);
+      addStyle(e.target);
     }
   });
 });
