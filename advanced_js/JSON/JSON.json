@@ -1,0 +1,24 @@
+{
+  "about_JSON": [
+    "there are many formats for http request. One of them json, json is  data format .",
+    "JSON is native object in JavaScript. It has two methods JSON.stringify(obj)-to json; JSON.parse(json)-to object"
+  ],
+  "user": "alex",
+  "id": 13,
+  "isHuman": true,
+  "money": null,
+  "childs": [
+    {
+      "daughter": {
+        "name": "Ann",
+        "age": 6
+      }
+    },
+    {
+      "son": {
+        "name": "Chris",
+        "age": 3
+      }
+    }
+  ]
+}
