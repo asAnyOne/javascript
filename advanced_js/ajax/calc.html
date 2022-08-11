@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        font: 2em sans-serif;
+      }
+      input {
+        font: 1.2em sans-serif;
+        padding: 10px;
+      }
+      form div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="" method="get">
+      <div>
+        <label for="rub">Rub</label>
+        <input autocomplete="off" type="text" id="rub" />
+      </div>
+      <div>
+        <label for="usd">Usd</label>
+        <input autocomplete="off" type="text" id="usd" />
+      </div>
+
+      <script src="js/calc.js"></script>
+    </form>
+  </body>
+</html>
