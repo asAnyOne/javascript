@@ -249,4 +249,123 @@ window.addEventListener("DOMContentLoaded", () => {
     });
   }
   forms.forEach((form) => sendForm(form));
+
+  // calculator calorie
+
+  //  для мужчин: BMR = 88.36 + (13.4 x вес, кг) + (4.8 х рост, см) – (5.7 х возраст, лет)
+  //  для женщин: BMR = 447.6 + (9.2 x вес, кг) + (3.1 х рост, cм) – (4.3 х возраст, лет)
+
+  // Минимальный уровень активности — 1.2
+  // Низкий уровень активности — 1.375
+  // Средний уровень активности — 1.55
+  // Высокий уровень — 1.725
+  // Очень высокий —  1.9
+
+  // Норма калорий = BMR x Уровень активности
+
+  const userGender = document.querySelector("#gender"),
+    userParams = document.querySelector(".calculating__choose_medium"),
+    userLifeParams = document.querySelector(".calculating__choose_big"),
+    result = document.querySelector(".calculating__result span"),
+    userData = {
+      men: 88.36,
+      women: 447.6,
+      low: 1.2,
+      small: 1.375,
+      medium: 1.55,
+      high: 1.725,
+      highest: 1.9,
+    };
+
+  let genderIndex = userData.women,
+    params = {
+      weight: 0,
+      height: 0,
+      age: 0,
+      activity: userData.small,
+    },
+    bmr;
+
+  function getResult() {
+    if (Object.values(params).every((e) => e) && bmr) {
+      result.textContent = Math.floor(bmr * params.activity);
+    }
+  }
+  getResult();
+
+  function clearClass(parent, target, claz) {
+    parent.childNodes.forEach((el) => {
+      if (el.nodeName !== "#text") {
+        el.classList.remove(claz);
+      }
+    });
+    target.classList.add(claz);
+  }
+
+  function getUserGender(target, gender) {
+    if (target.id === gender) {
+      clearClass(userGender, target, "calculating__choose-item_active");
+      genderIndex = userData[target.id];
+    }
+  }
+
+  userGender.addEventListener("click", (e) => {
+    if (e.target.id === "men" || e.target.id === "women") {
+      getUserGender(e.target, e.target.id);
+      countBmr();
+      getResult();
+    }
+  });
+
+  userParams.addEventListener("input", (e) => {
+    if (e.target.tagName === "INPUT") {
+      params[e.target.id] = e.target.value;
+      countBmr();
+      getResult();
+    }
+  });
+
+  function getLifeParams(target) {
+    if (
+      target.id === "low" ||
+      target.id === "small" ||
+      target.id === "medium" ||
+      target.id === "high" ||
+      target.id === "highest"
+    ) {
+      clearClass(userLifeParams, target, "calculating__choose-item_active");
+      params.activity = userData[target.id];
+    }
+  }
+
+  userLifeParams.addEventListener("click", (e) => {
+    getLifeParams(e.target);
+    countBmr();
+    getResult();
+  });
+
+  function countBmr() {
+    if (
+      document
+        .getElementById("women")
+        .classList.contains("calculating__choose-item_active")
+    ) {
+      bmr =
+        genderIndex +
+        params.weight * 9.2 +
+        params.height * 3.1 -
+        params.age * 4.3;
+    } else {
+      bmr =
+        genderIndex +
+        params.weight * 13.4 +
+        params.height * 4.8 -
+        params.age * 5.7;
+    }
+    console.log(bmr);
+  }
+
+  getUserGender(userGender.firstElementChild, "women");
+  getLifeParams(userLifeParams.querySelector("#small"));
+  countBmr();
 });
