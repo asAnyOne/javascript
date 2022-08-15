@@ -2,7 +2,7 @@
 
 function Constructor(name, age) {
   this.name = name;
-  let userAge = age;
+  let userAge = age; // encapsulation age
   this.getAge = function () {
     return userAge;
   };
@@ -24,28 +24,28 @@ ivan.setAge(-500);
 ivan.setAge("lsfl");
 console.log(ivan.getAge());
 
-class Clasz {
-  constructor(name, age) {
-    this.name = name;
-    this._age = age;
-  }
+// class Clasz {
+//   constructor(name, age) {
+//     this.name = name;
+//     this._age = age;
+//   }
 
-  #age = 90;
+//   #age = 90;  // encapsulation #age
 
-  set getAge(num) {
-    if (typeof num === "number" && num > 0 && num < 110) {
-      this.#age = num;
-    } else {
-      console.log("You type wrong symbols");
-    }
-  }
+//   set getAge(num) {
+//     if (typeof num === "number" && num > 0 && num < 110) {
+//       this.#age = num;
+//     } else {
+//       console.log("You type wrong symbols");
+//     }
+//   }
 
-  get getAge() {
-    return this.#age;
-  }
-}
+//   get getAge() {
+//     return this.#age;
+//   }
+// }
 
-const alex = new Clasz("Alex", 50);
+// const alex = new Clasz("Alex", 50);
 
-alex.getAge = 55;
-console.log(alex.getAge);
+// alex.getAge = 55;
+// console.log(alex.getAge);
