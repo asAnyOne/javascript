@@ -2,53 +2,36 @@
 window.addEventListener("DOMContentLoaded", () => {
   const btn = document.querySelector("button"),
     box = document.querySelector(".box");
-  let i = 0;
-  let y = 448;
-  let j = 0;
-  let s = 448;
+  let x = 0;
+  let side = "left";
+  let bool = false;
 
-  btn.addEventListener("click", () => requestAnimationFrame(myAnimation));
+  btn.addEventListener("click", () => requestAnimationFrame(down));
 
-  function myAnimation() {
-    box.style.cssText = `top:${i}px;left:${i}px`;
-    i++;
-    s = 448;
-
-    if (i === 448) {
-      requestAnimationFrame(up);
-    } else if (i < 448) {
-      requestAnimationFrame(myAnimation);
-    }
-  }
-  function supe() {
-    box.style.cssText = `top:${s}px;right:${448}px`;
-    s--;
-    j = 0;
-    if (s === -2) {
-      requestAnimationFrame(myAnimation);
-    } else if (s > -2) {
-      requestAnimationFrame(supe);
-    }
-  }
   function down() {
-    box.style.cssText = `top:${j}px;right:${j}px`;
-    j++;
-    y = 448;
+    box.style.cssText = `top:${x}px; ${side}:${x}px`;
+    x++;
 
-    if (j === 448) {
-      requestAnimationFrame(supe);
-    } else if (j < 448) {
+    if (x === 448) {
+      requestAnimationFrame(up);
+    } else if (x < 448) {
       requestAnimationFrame(down);
     }
   }
-  function up() {
-    box.style.cssText = `top:${y}px;left:${448}px`;
-    y--;
-    i = 0;
 
-    if (y === -2) {
+  function up() {
+    box.style.cssText = `top:${x}px; ${side}:${448}px`;
+    x--;
+
+    if (x === -2) {
+      if (side === "left") {
+        side = "right";
+      } else {
+        side = "left";
+      }
       requestAnimationFrame(down);
-    } else if (y > -2) {
+      x = 0;
+    } else if (x > -2) {
       requestAnimationFrame(up);
     }
   }
