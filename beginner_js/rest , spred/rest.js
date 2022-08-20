@@ -16,6 +16,8 @@ function spred(spred) {
   const [c, d, e, f] = arr;
 
   console.log(...spred);
+  console.log({ ...spred });
+  console.log({ ...obj });
 
   console.log(a, b); // 1 2                   destructuring
   console.log(c, d, e, f); // 1 2 3 4         destructuring

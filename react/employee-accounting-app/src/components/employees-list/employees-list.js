@@ -6,7 +6,7 @@ import "./employees-list.css";
 
 class EmployeesList extends Component {
   render() {
-    const { data, onDelete } = this.props;
+    const { data, onDelete, onToggleIncrease, onToggleLike } = this.props;
     const listItems = data.map((item) => {
       const { id, ...itemProps } = item;
       return (
@@ -14,6 +14,8 @@ class EmployeesList extends Component {
           key={id}
           {...itemProps}
           onDelete={() => onDelete(id)}
+          onToggleIncrease={() => onToggleIncrease(id, "increase")}
+          onToggleLike={() => onToggleLike(id, "like")}
         />
       );
     });
