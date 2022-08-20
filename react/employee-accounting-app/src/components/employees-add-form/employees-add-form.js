@@ -22,7 +22,19 @@ class EmployeesAddForm extends Component {
     return (
       <div className="app-add-form">
         <h3>Add the new employee</h3>
-        <form action="" className="add-form d-flex">
+        <form
+          className="add-form d-flex"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (salary !== "" && name !== "") {
+              this.props.getData(this.state);
+              this.setState({
+                name: "",
+                salary: "",
+              });
+            }
+          }}
+        >
           <input
             type="text"
             placeholder="what is his(her) name?"
