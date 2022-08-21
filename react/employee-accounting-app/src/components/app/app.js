@@ -64,7 +64,6 @@ class App extends Component {
         return this.state.data.filter(
           (item) => item[filter] > 1000 && getBoolean(item)
         );
-
       case "increase":
         return this.state.data.filter(
           (item) => item[filter] && getBoolean(item)
@@ -73,14 +72,14 @@ class App extends Component {
         return this.state.data.filter((item) => getBoolean(item));
     }
 
-    // else if (filter === "all") {
-    //   return this.state.data.filter((item) => getBoolean(item));
-    // } else if (filter === "increase") {
-    //   return this.state.data.filter((item) => item[filter] && getBoolean(item));
-    // } else {
+    // else if (filter === "salary") {
     //   return this.state.data.filter(
     //     (item) => item[filter] > 1000 && getBoolean(item)
     //   );
+    // } else if (filter === "increase") {
+    //   return this.state.data.filter((item) => item[filter] && getBoolean(item));
+    // } else {
+    //  return this.state.data.filter((item) => getBoolean(item));
     // }
   };
   onSearch = (e) => {
