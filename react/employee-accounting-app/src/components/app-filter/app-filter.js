@@ -11,57 +11,38 @@ class AppFilter extends Component {
     };
   }
 
-  activeTab = (e) => {
-    this.setState({
-      active: e.target.getAttribute("data-filter"),
-    });
+  addActiveClass = (dataFilter) => {
+    const light = "btn btn-light",
+      outline = "btn btn-outline-light";
+    return this.state.active === dataFilter ? light : outline;
   };
-
+  onFilter = (e) => {
+    const active = e.target.getAttribute("data-filter");
+    this.setState({ active });
+    this.props.onFilter(e);
+  };
   render() {
-    const { active } = this.state;
-    return (
-      <div className="btn-group">
-        <button
-          className={
-            active === "all" ? "btn btn-light" : "btn btn-outline-light"
-          }
-          type="button"
-          data-filter="all"
-          onClick={(e) => {
-            this.activeTab(e);
-            this.props.onFilter(e);
-          }}
-        >
-          All employees
-        </button>
-        <button
-          className={
-            active === "increase" ? "btn btn-light" : "btn btn-outline-light"
-          }
-          type="button"
-          data-filter="increase"
-          onClick={(e) => {
-            this.activeTab(e);
-            this.props.onFilter(e);
-          }}
-        >
-          Employees for rise
-        </button>
-        <button
-          className={
-            active === "salary" ? "btn btn-light" : "btn btn-outline-light"
-          }
-          type="button"
-          data-filter="salary"
-          onClick={(e) => {
-            this.activeTab(e);
-            this.props.onFilter(e);
-          }}
-        >
-          Salary over then 1000$
-        </button>
-      </div>
-    );
+    const btnsData = [
+      { clazz: "all", content: "All employees" },
+      { clazz: "increase", content: "Employees for rise" },
+      { clazz: "salary", content: "Salary over then 1000$" },
+    ];
+    const button = () => {
+      return btnsData.map(({ clazz, content }, i) => {
+        return (
+          <button
+            key={i}
+            className={this.addActiveClass(clazz)}
+            type="button"
+            data-filter={clazz}
+            onClick={this.onFilter}
+          >
+            {content}
+          </button>
+        );
+      });
+    };
+    return <div className="btn-group">{button()}</div>;
   }
 }
 export default AppFilter;

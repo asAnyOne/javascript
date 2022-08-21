@@ -28,10 +28,11 @@ class App extends Component {
     }));
   };
   addItem = (dat) => {
+    const id = ((this.state.data.length + 1) * Math.random()).toFixed(15);
     this.setState(({ data }) => {
       dat.increase = false;
       dat.like = false;
-      dat.id = this.state.data.length + 1;
+      dat.id = id;
       return { data: [...data, dat] };
     });
   };
@@ -53,45 +54,40 @@ class App extends Component {
   };
 
   updateList = (search, filter) => {
+    const data = this.state.data;
     function getBoolean(item) {
       return !!item.name.toLowerCase().match(search.toLowerCase());
     }
     if (search === "" && filter === "all") {
-      return this.state.data;
+      return data;
     }
     switch (filter) {
       case "salary":
-        return this.state.data.filter(
-          (item) => item[filter] > 1000 && getBoolean(item)
-        );
+        return data.filter((item) => item[filter] > 1000 && getBoolean(item));
       case "increase":
-        return this.state.data.filter(
-          (item) => item[filter] && getBoolean(item)
-        );
+        return data.filter((item) => item[filter] && getBoolean(item));
       default:
-        return this.state.data.filter((item) => getBoolean(item));
+        return data.filter((item) => getBoolean(item));
     }
 
     // else if (filter === "salary") {
-    //   return this.state.data.filter(
+    //   return  data.filter(
     //     (item) => item[filter] > 1000 && getBoolean(item)
     //   );
     // } else if (filter === "increase") {
-    //   return this.state.data.filter((item) => item[filter] && getBoolean(item));
+    //   return  data.filter((item) => item[filter] && getBoolean(item));
     // } else {
-    //  return this.state.data.filter((item) => getBoolean(item));
+    //  return  data.filter((item) => getBoolean(item));
     // }
   };
   onSearch = (e) => {
-    this.setState({
-      search: e.target.value,
-    });
+    const search = e.target.value;
+    this.setState({ search });
   };
 
   onFilter = (e) => {
-    this.setState({
-      filter: e.target.getAttribute("data-filter"),
-    });
+    const filter = e.target.getAttribute("data-filter");
+    this.setState({ filter });
   };
   render() {
     const { filter, search, data } = this.state;
