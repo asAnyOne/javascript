@@ -10,7 +10,7 @@ import mjolnir from "../../resources/img/mjolnir.png";
 class RandomChar extends Component {
   constructor(props) {
     super(props);
-    this.updateCharacter();
+
     this.state = {
       character: {
         name: "",
@@ -23,9 +23,15 @@ class RandomChar extends Component {
       error: false,
     };
   }
+  componentDidMount() {
+    this.updateCharacter();
+  }
 
   marvelService = new MarvelService();
 
+  onloading = () => {
+    this.setState({ loading: true, error: false });
+  };
   onLoaded = (character) => {
     this.setState({ character, loading: false });
   };
@@ -34,6 +40,7 @@ class RandomChar extends Component {
   };
 
   updateCharacter = () => {
+    this.onloading();
     const id = +(Math.random() * 400).toFixed(0) + 1009300;
     this.marvelService.getCharacter(id).then(this.onLoaded).catch(this.onError);
   };
