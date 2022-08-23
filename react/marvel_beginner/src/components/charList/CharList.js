@@ -9,30 +9,44 @@ class CharList extends Component {
     list: [],
     loading: true,
     error: false,
-    count: 9,
+    offset: 1520,
+    newItemsLoading: false,
   };
 
   marvelService = new MarvelService();
   onLoading = () => {
-    this.setState({ loading: true, error: false });
+    this.setState({
+      loading: true,
+      error: false,
+      newItemsLoading: true,
+    });
   };
-  onLoaded = (list) => {
-    this.setState({ list, loading: false });
+  onLoaded = (newlist) => {
+    this.setState(({ list, offset }) => ({
+      list: [...list, ...newlist],
+      loading: false,
+      newItemsLoading: false,
+      offset: offset + 9,
+    }));
   };
   onError = () => {
-    this.setState({ loading: false, error: true });
+    this.setState({
+      loading: false,
+      error: true,
+    });
   };
 
   componentDidMount() {
     this.getCharList(this.state.count);
   }
-  getCharList = (count) => {
+  getCharList = (offset) => {
     this.onLoading();
     this.marvelService
-      .getAllCharacters(count)
+      .getAllCharacters(offset)
       .then(this.onLoaded)
       .catch(this.onError);
   };
+
   createCharList = () => {
     return this.state.list.map(({ id, name, thumb }) => {
       const styleImgLess =
@@ -53,19 +67,23 @@ class CharList extends Component {
     });
   };
 
-  onAddCharacters = () => {
-    const count = this.state.count + 9;
-    this.setState({ count });
-    this.getCharList(count);
-  };
-
   render() {
+    const { newItemsLoading, offset } = this.state;
+
     return (
       <div className="char__list">
         <ul className="char__grid">{this.createCharList()}</ul>
         <button
+          disabled={newItemsLoading}
+          style={
+            newItemsLoading
+              ? { opacity: 0.4 }
+              : offset >= 1562
+              ? { display: "none" }
+              : null
+          }
           className="button button__main button__long"
-          onClick={this.onAddCharacters}
+          onClick={() => this.getCharList(this.state.offset)}
         >
           <div className="inner">load more</div>
         </button>

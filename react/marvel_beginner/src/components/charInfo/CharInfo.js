@@ -64,8 +64,8 @@ class CharInfo extends Component {
     }
     const { name, description, thumb, wiki, details, comics } =
       this.state.character;
-    const comicsList = () => {
-      return comics.map((item, i) => {
+    const list = (item) => {
+      return item.map((item, i) => {
         return (
           <li key={i} className="char__comics-item">
             {item.name}
@@ -73,6 +73,8 @@ class CharInfo extends Component {
         );
       });
     };
+    const comicsList =
+      comics.length > 9 ? list(comics.splice(10)) : list(comics);
 
     return (
       <div className="char__info">
@@ -105,7 +107,7 @@ class CharInfo extends Component {
             : "There is not any description about character"}
         </div>
         <div className="char__comics">Comics:</div>
-        <ul className="char__comics-list">{comicsList()}</ul>
+        <ul className="char__comics-list">{comicsList}</ul>
       </div>
     );
   }

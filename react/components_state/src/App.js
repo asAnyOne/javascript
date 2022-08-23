@@ -1,4 +1,9 @@
 import { Component } from "react";
+
+import Form from "./components/form/Form";
+import Name from "./components/name/Name";
+import Age from "./components/age/Age";
+
 import "./App.css";
 
 class App extends Component {
@@ -46,6 +51,14 @@ class App extends Component {
           <button onClick={this.rndCounter}>RND</button>
           <button onClick={this.resetCounter}>RESET</button>
         </div>
+        <Form
+          render={(name, age) => (
+            <>
+              <Name name={name} />
+              <Age age={age} />
+            </>
+          )}
+        />
       </div>
     );
   }
