@@ -35,12 +35,10 @@ class CharInfo extends Component {
   };
   componentDidMount() {
     this.getSelectedCharacterInfo();
-    console.log("mount");
   }
   componentDidUpdate(prevProps) {
     if (this.props.characterId !== prevProps.characterId) {
       this.getSelectedCharacterInfo();
-      console.log("update");
     }
   }
 
