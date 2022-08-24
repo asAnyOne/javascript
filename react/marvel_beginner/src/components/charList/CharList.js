@@ -49,7 +49,7 @@ class CharList extends Component {
   };
 
   createCharList = () => {
-    return this.state.list.map(({ id, name, thumb }, i) => {
+    return this.state.list.map(({ id, name, thumb }) => {
       const styleImgLess =
         thumb ===
         "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
@@ -60,7 +60,7 @@ class CharList extends Component {
           ref={this.selectedItemRef}
           className="char__item"
           key={id}
-          tabIndex={i}
+          tabIndex={0}
           style={
             id === this.state.selectedItemId
               ? {

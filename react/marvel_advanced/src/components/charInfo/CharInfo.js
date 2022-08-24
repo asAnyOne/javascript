@@ -28,8 +28,10 @@ const CharInfo = (props) => {
     onLoading();
     marvelService.getCharacter(characterId).then(onLoaded).catch(onError);
   };
+
   useEffect(() => {
     getSelectedCharacterInfo(props.characterId);
+    // eslint-disable-next-line
   }, [props.characterId]);
 
   if (!character) {

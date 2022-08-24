@@ -17,7 +17,7 @@ const RandomChar = (props) => {
     }),
     [loading, setLoading] = useState(true),
     [error, setError] = useState(false);
-
+  // eslint-disable-next-line
   useEffect(() => updateCharacter(), []);
 
   const marvelService = new MarvelService();

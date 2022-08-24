@@ -10,6 +10,7 @@ const CharList = (props) => {
   const [error, setError] = useState(false);
   const [offset, setOffset] = useState(1520);
   const [newItemsLoading, setNewItemsLoading] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
   const marvelService = new MarvelService();
   const onLoading = () => {
@@ -17,13 +18,13 @@ const CharList = (props) => {
     setNewItemsLoading(true);
   };
   const onLoaded = (newlist) => {
-    setList([...list, ...newlist]);
+    setList((list) => [...list, ...newlist]);
 
     setNewItemsLoading(false);
-    setOffset(offset + 9);
+    setOffset((offset) => offset + 9);
   };
   const onError = () => setError(true);
-
+  // eslint-disable-next-line
   useEffect(() => getCharList(offset), []);
 
   const getCharList = (offset) => {
@@ -42,7 +43,19 @@ const CharList = (props) => {
         <li
           className="char__item"
           key={id}
-          onClick={() => props.getCharacter(id)}
+          tabIndex={0}
+          style={
+            id === selectedItemId
+              ? {
+                  boxShadow: "0 20px 30px rgb(15, 200, 200)",
+                  transform: "translateY(-8px)",
+                }
+              : null
+          }
+          onClick={() => {
+            props.getCharacter(id);
+            setSelectedItemId(id);
+          }}
         >
           <img src={thumb} alt={name} style={styleImgLess} />
           <div className="char__name">{name} </div>
