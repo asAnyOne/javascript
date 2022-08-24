@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import MarvelService from "../../services/MarvelService";
+import useMarvelService from "../../services/MarvelService";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
@@ -9,36 +9,25 @@ import mjolnir from "../../resources/img/mjolnir.png";
 
 const RandomChar = (props) => {
   const [character, setCharacter] = useState({
-      name: "",
-      description: "",
-      thumb: "",
-      wiki: "",
-      details: "",
-    }),
-    [loading, setLoading] = useState(true),
-    [error, setError] = useState(false);
+    name: "",
+    description: "",
+    thumb: "",
+    wiki: "",
+    details: "",
+  });
   // eslint-disable-next-line
   useEffect(() => updateCharacter(), []);
 
-  const marvelService = new MarvelService();
+  const { loading, error, clearError, getCharacter } = useMarvelService();
 
-  const onloading = () => {
-    setLoading(true);
-    setError(false);
-  };
   const onLoaded = (character) => {
     setCharacter(character);
-    setLoading(false);
-  };
-  const onError = () => {
-    setLoading(false);
-    setError(true);
   };
 
   const updateCharacter = () => {
-    onloading();
+    clearError();
     const id = +(Math.random() * 400).toFixed(0) + 1009300;
-    marvelService.getCharacter(id).then(onLoaded).catch(onError);
+    getCharacter(id).then(onLoaded);
   };
 
   return (

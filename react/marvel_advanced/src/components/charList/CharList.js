@@ -1,35 +1,30 @@
 import { useEffect, useState } from "react";
 
-import MarvelService from "../../services/MarvelService";
+import useMarvelService from "../../services/MarvelService";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import "./charList.scss";
 
 const CharList = (props) => {
   const [list, setList] = useState([]);
-  const [error, setError] = useState(false);
   const [offset, setOffset] = useState(1520);
   const [newItemsLoading, setNewItemsLoading] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
 
-  const marvelService = new MarvelService();
-  const onLoading = () => {
-    setError(false);
-    setNewItemsLoading(true);
-  };
+  const { error, getAllCharacters } = useMarvelService();
+
   const onLoaded = (newlist) => {
     setList((list) => [...list, ...newlist]);
-
     setNewItemsLoading(false);
     setOffset((offset) => offset + 9);
   };
-  const onError = () => setError(true);
+
   // eslint-disable-next-line
   useEffect(() => getCharList(offset), []);
 
   const getCharList = (offset) => {
-    onLoading();
-    marvelService.getAllCharacters(offset).then(onLoaded).catch(onError);
+    setNewItemsLoading(true);
+    getAllCharacters(offset).then(onLoaded);
   };
 
   const createCharList = () => {

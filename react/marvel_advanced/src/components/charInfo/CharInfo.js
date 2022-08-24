@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import MarvelService from "../../services/MarvelService";
+import useMarvelService from "../../services/MarvelService";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 import Skeleton from "../skeleton/Skeleton";
@@ -8,25 +8,15 @@ import Skeleton from "../skeleton/Skeleton";
 import "./charInfo.scss";
 
 const CharInfo = (props) => {
-  const [character, setCharacter] = useState(null),
-    [loading, setLoading] = useState(false),
-    [error, setError] = useState(false);
+  const [character, setCharacter] = useState(null);
 
-  const marvelService = new MarvelService();
+  const { loading, error, getCharacter } = useMarvelService();
 
-  const onLoading = () => setLoading(true);
-  const onLoaded = (character) => {
-    setCharacter(character);
-    setLoading(false);
-    setError(false);
-  };
-
-  const onError = () => setError(true);
+  const onLoaded = (character) => setCharacter(character);
 
   const getSelectedCharacterInfo = (characterId) => {
     if (!characterId) return;
-    onLoading();
-    marvelService.getCharacter(characterId).then(onLoaded).catch(onError);
+    getCharacter(characterId).then(onLoaded);
   };
 
   useEffect(() => {
