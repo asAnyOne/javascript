@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React, { Component } from "react";
 
 import MarvelService from "../../services/MarvelService";
 
@@ -11,6 +11,7 @@ class CharList extends Component {
     error: false,
     offset: 1520,
     newItemsLoading: false,
+    selectedItemId: null,
   };
 
   marvelService = new MarvelService();
@@ -48,7 +49,7 @@ class CharList extends Component {
   };
 
   createCharList = () => {
-    return this.state.list.map(({ id, name, thumb }) => {
+    return this.state.list.map(({ id, name, thumb }, i) => {
       const styleImgLess =
         thumb ===
         "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
@@ -56,9 +57,24 @@ class CharList extends Component {
           : null;
       return (
         <li
+          ref={this.selectedItemRef}
           className="char__item"
           key={id}
-          onClick={() => this.props.getCharacter(id)}
+          tabIndex={i}
+          style={
+            id === this.state.selectedItemId
+              ? {
+                  boxShadow: "0 20px 30px rgb(15, 200, 200)",
+                  transform: "translateY(-8px)",
+                }
+              : null
+          }
+          onClick={() => {
+            this.props.getCharacter(id);
+            this.setState({
+              selectedItemId: id,
+            });
+          }}
         >
           <img src={thumb} alt={name} style={styleImgLess} />
           <div className="char__name">{name} </div>
