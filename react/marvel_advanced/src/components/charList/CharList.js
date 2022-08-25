@@ -28,7 +28,7 @@ const CharList = (props) => {
   };
 
   const createCharList = () => {
-    return list.map(({ id, name, thumb }) => {
+    return list.map(({ id, name, thumb }, i) => {
       const styleImgLess =
         thumb ===
         "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg"
@@ -37,7 +37,7 @@ const CharList = (props) => {
       return (
         <li
           className="char__item"
-          key={id}
+          key={i}
           tabIndex={0}
           style={
             id === selectedItemId

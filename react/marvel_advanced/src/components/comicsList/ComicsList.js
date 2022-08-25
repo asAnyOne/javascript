@@ -15,28 +15,22 @@ const ComicsList = () => {
   const { loading, error, getAllComics } = useMarvelService();
 
   useEffect(() => {
-    console.log("effect");
     setInit(true);
     getComicsList();
     // eslint-disable-next-line
   }, []);
-
   const onLoaded = (newComicsList) => {
     setComicsList((comicsList) => [...comicsList, ...newComicsList]);
     setOffset((offset) => offset + 8);
     setNewItemsLoading(false);
     setInit(false);
-    console.log("loaded");
   };
 
   const getComicsList = () => {
     setNewItemsLoading(true);
     getAllComics(offset).then(onLoaded);
-    console.log("getList");
   };
-
-  const createComicsList = () => {
-    console.log("create");
+  const addComicsList = () => {
     return comicsList.map(({ title, details, thumb, price }, i) => {
       return (
         <li className="comics__item" key={i} tabIndex={0}>
@@ -49,21 +43,27 @@ const ComicsList = () => {
       );
     });
   };
+
   const btnStyle = newItemsLoading
     ? { opacity: 0.4 }
     : offset >= 52700
     ? { display: "none" }
     : null;
+
+  const list = () => {
+    if (error) {
+      return <ErrorMessage />;
+    } else if (loading && init) {
+      return <Spinner />;
+    } else {
+      return <ul className="comics__grid">{addComicsList()}</ul>;
+    }
+  };
+  console.log("render");
+
   return (
     <div className="comics__list">
-      {error ? (
-        ErrorMessage
-      ) : loading && init ? (
-        <Spinner />
-      ) : (
-        <ul className="comics__grid">{createComicsList()}</ul>
-      )}
-
+      {list()}
       <button
         className="button button__main button__long"
         onClick={getComicsList}
