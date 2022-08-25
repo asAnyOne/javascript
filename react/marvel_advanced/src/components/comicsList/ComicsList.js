@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import useMarvelService from "../../services/MarvelService";
 import ErrorMessage from "../errorMessage/ErrorMessage";
@@ -31,14 +32,14 @@ const ComicsList = () => {
     getAllComics(offset).then(onLoaded);
   };
   const addComicsList = () => {
-    return comicsList.map(({ title, details, thumb, price }, i) => {
+    return comicsList.map(({ title, thumb, price, id }, i) => {
       return (
         <li className="comics__item" key={i} tabIndex={0}>
-          <a href={details}>
+          <Link to={`/comics/${id}`}>
             <img src={thumb} alt="ultimate war" className="comics__item-img" />
             <div className="comics__item-name">{title}</div>
             <div className="comics__item-price">{price} </div>
-          </a>
+          </Link>
         </li>
       );
     });
@@ -59,7 +60,6 @@ const ComicsList = () => {
       return <ul className="comics__grid">{addComicsList()}</ul>;
     }
   };
-  console.log("render");
 
   return (
     <div className="comics__list">

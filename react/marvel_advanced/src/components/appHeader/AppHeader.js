@@ -14,12 +14,16 @@ const AppHeader = () => {
         <ul>
           <li>
             <NavLink
-              activeStyle={{
-                textShadow: "0  0 30px blue",
-                color: "red",
-                textDecoration: "underline",
-              }}
-              exact
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      textShadow: "0  0 30px blue",
+                      color: "red",
+                      textDecoration: "underline",
+                    }
+                  : null
+              }
+              end
               to="/"
             >
               Characters
@@ -28,12 +32,15 @@ const AppHeader = () => {
           /
           <li>
             <NavLink
-              activeStyle={{
-                textShadow: "0 0 30px blue",
-                color: "red",
-                textDecoration: "underline",
-              }}
-              exact
+              style={({ isActive }) =>
+                isActive
+                  ? {
+                      textShadow: "0 0 30px blue",
+                      color: "red",
+                      textDecoration: "underline",
+                    }
+                  : null
+              }
               to="/comics"
             >
               Comics
