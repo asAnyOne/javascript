@@ -7,7 +7,7 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import "./singleComicPage.scss";
 
-const SingleComic = () => {
+const SingleComicPage = () => {
   const { comicId } = useParams();
 
   const [comic, setComic] = useState({});
@@ -61,4 +61,4 @@ const SingleComic = () => {
   );
 };
 
-export default SingleComic;
+export default SingleComicPage;
