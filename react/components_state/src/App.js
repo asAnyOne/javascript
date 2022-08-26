@@ -17,7 +17,7 @@ class App extends Component {
     };
   }
 
-  dyn = () =>
+  toggleDynamicComponent = () =>
     import("./components/dynamic-components/Dynamic").then((data) =>
       this.state.dynamic
         ? this.setState({ dynamic: null })
@@ -76,7 +76,9 @@ class App extends Component {
 
         {this.state.dynamic}
 
-        <button onClick={this.dyn}>toggle the dynamic componet</button>
+        <button onClick={this.toggleDynamicComponent}>
+          toggle the dynamic componet
+        </button>
       </div>
     );
   }
