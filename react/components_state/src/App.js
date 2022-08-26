@@ -13,8 +13,17 @@ class App extends Component {
     super(props);
     this.state = {
       counter: this.props.counter,
+      dynamic: null,
     };
   }
+
+  dyn = () =>
+    import("./components/dynamic-components/Dynamic").then((data) =>
+      this.state.dynamic
+        ? this.setState({ dynamic: null })
+        : this.setState({ dynamic: data.Dynamic() })
+    );
+
   incCounter = () => {
     if (this.state.counter < 50)
       this.setState(({ counter }) => ({
@@ -64,6 +73,10 @@ class App extends Component {
         <Suspense fallback={<div>It is loading, MyLazyComp</div>}>
           <MyLazyComp />
         </Suspense>
+
+        {this.state.dynamic}
+
+        <button onClick={this.dyn}>toggle the dynamic componet</button>
       </div>
     );
   }
