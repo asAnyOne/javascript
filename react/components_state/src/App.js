@@ -1,10 +1,12 @@
-import { Component } from "react";
+import { Component, lazy, Suspense } from "react";
 
 import Form from "./components/form/Form";
 import Name from "./components/name/Name";
 import Age from "./components/age/Age";
 
 import "./App.css";
+
+const MyLazyComp = lazy(() => import("./components/my-lazy-comp/MyLazyComp"));
 
 class App extends Component {
   constructor(props) {
@@ -59,6 +61,9 @@ class App extends Component {
             </>
           )}
         />
+        <Suspense fallback={<div>It is loading, MyLazyComp</div>}>
+          <MyLazyComp />
+        </Suspense>
       </div>
     );
   }

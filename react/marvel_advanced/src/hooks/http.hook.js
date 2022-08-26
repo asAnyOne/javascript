@@ -16,19 +16,19 @@ const useHttp = () => {
       const respons = await fetch(url, { method, body, header });
 
       if (!respons.ok) {
-        throw new Error(() => {
-          console.log(`Could not fetch ${url} status ${respons.status}`);
-        });
+        throw new Error(
+          console.log(`Could not fetch ${url} status ${respons.status}`)
+        );
       }
       const data = await respons.json();
 
       setLoading(false);
 
       return data;
-    } catch (error) {
+    } catch (e) {
       setLoading(false);
-      setError(error.message);
-      throw error;
+      setError(true);
+      throw e;
     }
   };
 

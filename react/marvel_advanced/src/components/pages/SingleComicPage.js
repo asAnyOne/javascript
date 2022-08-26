@@ -8,15 +8,16 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 import "./singleComicPage.scss";
 
 const SingleComicPage = () => {
-  const { comicId } = useParams();
-
   const [comic, setComic] = useState({});
 
-  const { loading, error, getComic } = useMarvelService();
+  const { comicId } = useParams();
+
+  const { loading, error, clearError, getComic } = useMarvelService();
 
   const onLoaded = (comic) => setComic(comic);
 
   const getSelectedComicInfo = (comicId) => {
+    clearError();
     getComic(comicId).then(onLoaded);
   };
 
