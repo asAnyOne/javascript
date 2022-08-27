@@ -13,7 +13,7 @@ const Form = () => {
     },
     validationSchema: Yup.object({
       name: Yup.string()
-        .min(3, "minimal count  of symbols should be equal 3")
+        .min(2, "minimal count  of symbols should be equal 2")
         .required("required fields"),
       email: Yup.string()
         .email("wrong format email")
@@ -59,12 +59,12 @@ const Form = () => {
       {validationCondition("amount")}
       <label htmlFor="currency">Валюта</label>
       <select {...attributes("currency")}>
-        {validationCondition("currency")}
         <option value="">Выберите валюту</option>
         <option value="USD">USD</option>
         <option value="UAH">UAH</option>
         <option value="RUB">RUB</option>
       </select>
+      {validationCondition("currency")}
       <label htmlFor="text">Ваше сообщение</label>
       <textarea {...attributes("text")} />
       {validationCondition("text")}
