@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 import useMarvelService from "../../services/MarvelService";
 import Spinner from "../spinner/Spinner";
@@ -47,6 +48,13 @@ const SinglePage = ({ Component, dataType }) => {
 
   return (
     <>
+      <Helmet>
+        <meta
+          name="description"
+          content="Character and comic Marvel information portal"
+        />
+        <title>Character and comic information </title>
+      </Helmet>
       <AppBanner />
       {errorMessage}
       {spinner}
