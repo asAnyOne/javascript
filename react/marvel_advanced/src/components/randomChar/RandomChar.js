@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
 import useMarvelService from "../../services/MarvelService";
-import Spinner from "../spinner/Spinner";
-import ErrorMessage from "../errorMessage/ErrorMessage";
+import setComponent from "../../utils/setComponent";
 
 import "./randomChar.scss";
 import mjolnir from "../../resources/img/mjolnir.png";
@@ -18,27 +17,23 @@ const RandomChar = (props) => {
   // eslint-disable-next-line
   useEffect(() => updateCharacter(), []);
 
-  const { loading, error, clearError, getCharacter } = useMarvelService();
+  const { process, setProcess, clearError, getCharacter } = useMarvelService();
 
-  const onLoaded = (character) => {
-    setCharacter(character);
+  const onLoaded = (data) => {
+    setCharacter(data);
   };
 
   const updateCharacter = () => {
     clearError();
     const id = +(Math.random() * 400).toFixed(0) + 1009300;
-    getCharacter(id).then(onLoaded);
+    getCharacter(id)
+      .then(onLoaded)
+      .then(() => setProcess("confirmed"));
   };
 
   return (
     <div className="randomchar">
-      {loading ? (
-        <Spinner />
-      ) : error ? (
-        <ErrorMessage />
-      ) : (
-        <View char={character} />
-      )}
+      {setComponent(process, View, character)}
 
       <div className="randomchar__static">
         <p className="randomchar__title">
@@ -56,8 +51,8 @@ const RandomChar = (props) => {
   );
 };
 
-const View = ({ char }) => {
-  const { name, description, thumb, wiki, details } = char;
+const View = ({ data }) => {
+  const { name, description, thumb, wiki, details } = data;
   let fixedDescription;
   if (description.length <= 0) {
     fixedDescription = "There is not any description of the character.";

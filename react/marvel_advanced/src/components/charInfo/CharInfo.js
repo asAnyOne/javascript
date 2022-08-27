@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 
 import useMarvelService from "../../services/MarvelService";
-import Spinner from "../spinner/Spinner";
-import ErrorMessage from "../errorMessage/ErrorMessage";
-import Skeleton from "../skeleton/Skeleton";
+import setComponent from "../../utils/setComponent";
 
 import "./charInfo.scss";
 
 const CharInfo = (props) => {
   const [character, setCharacter] = useState(null);
 
-  const { loading, error, getCharacter } = useMarvelService();
+  const { process, setProcess, getCharacter } = useMarvelService();
 
-  const onLoaded = (character) => setCharacter(character);
+  const onLoaded = (data) => setCharacter(data);
 
   const getSelectedCharacterInfo = (characterId) => {
     if (!characterId) return;
-    getCharacter(characterId).then(onLoaded);
+    getCharacter(characterId)
+      .then(onLoaded)
+      .then(() => setProcess("confirmed"));
   };
 
   useEffect(() => {
@@ -24,26 +24,13 @@ const CharInfo = (props) => {
     // eslint-disable-next-line
   }, [props.characterId]);
 
-  if (!character) {
-    return (
-      <div className="char__info">
-        <Skeleton />
-      </div>
-    );
-  } else if (loading) {
-    return (
-      <div className="char__info">
-        <Spinner />
-      </div>
-    );
-  } else if (error) {
-    return (
-      <div className="char__info">
-        <ErrorMessage />
-      </div>
-    );
-  }
-  const { name, description, thumb, wiki, details, comics } = character;
+  return (
+    <div className="char__info">{setComponent(process, View, character)}</div>
+  );
+};
+
+const View = ({ data }) => {
+  const { name, description, thumb, wiki, details, comics } = data;
   const list = (item) => {
     return item.map((item, i) => {
       return (
@@ -56,7 +43,7 @@ const CharInfo = (props) => {
   const comicsList = comics.length > 9 ? list(comics.splice(10)) : list(comics);
 
   return (
-    <div className="char__info">
+    <>
       <div className="char__basics">
         <img
           src={thumb}
@@ -81,13 +68,11 @@ const CharInfo = (props) => {
         </div>
       </div>
       <div className="char__descr">
-        {description
-          ? description
-          : "There is not any description about character"}
+        {description || "There is not any description about character"}
       </div>
       <div className="char__comics">Comics:</div>
       <ul className="char__comics-list">{comicsList}</ul>
-    </div>
+    </>
   );
 };
 
