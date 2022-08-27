@@ -6,6 +6,7 @@ import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
 
 import decoration from "../../resources/img/vision.png";
+import CharSearchForm from "../charSearchForm/CharSearchForm";
 
 const MainPage = () => {
   const [characterId, setCharacterId] = useState(null);
@@ -23,9 +24,14 @@ const MainPage = () => {
         <ErrorBoundary>
           <CharList getCharacter={getChar} />
         </ErrorBoundary>
-        <ErrorBoundary>
-          <CharInfo characterId={characterId} />
-        </ErrorBoundary>
+        <div>
+          <ErrorBoundary>
+            <CharInfo characterId={characterId} />
+          </ErrorBoundary>
+          <ErrorBoundary>
+            <CharSearchForm />
+          </ErrorBoundary>
+        </div>
       </div>
       <img className="bg-decoration" src={decoration} alt="vision" />
     </>
