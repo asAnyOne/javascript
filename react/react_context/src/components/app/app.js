@@ -10,17 +10,19 @@ import DataContext from "../context/context";
 import "./app.css";
 
 const { Provider } = DataContext;
-
 class App extends Component {
-  state = {
-    data: [
-      { name: "John S", salary: 5000, increase: false, like: true, id: 1 },
-      { name: "Alex M", salary: 3000, increase: true, like: false, id: 2 },
-      { name: "Carl W", salary: 800, increase: false, like: false, id: 3 },
-    ],
-    search: "",
-    filter: "all",
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [
+        { name: "John S", salary: 5000, increase: false, like: true, id: 1 },
+        { name: "Alex M", salary: 3000, increase: true, like: false, id: 2 },
+        { name: "Carl W", salary: 800, increase: false, like: false, id: 3 },
+      ],
+      search: "",
+      filter: "all",
+    };
+  }
 
   deleteItem = (id) => {
     this.setState(({ data }) => ({
@@ -92,6 +94,7 @@ class App extends Component {
   render() {
     const { filter, search, data } = this.state;
     const visibleData = this.updateList(search, filter);
+    console.dir({ Provider });
 
     return (
       <div className="app">
