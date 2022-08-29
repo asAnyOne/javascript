@@ -1,0 +1,55 @@
+{
+  "heroes": [
+    {
+      "id": 1,
+      "name": "Первый герой",
+      "description": "Первый герой в рейтинге!",
+      "element": "fire"
+    },
+    {
+      "id": 3,
+      "name": "Морской герой",
+      "description": "Как аквамен, но не из DC",
+      "element": "water"
+    },
+    {
+      "id": "c449719b-2212-4d18-92c4-64491513df3e",
+      "name": "ываодовдало",
+      "description": "laskjldjkls",
+      "element": "earth"
+    },
+    {
+      "id": "67f44044-29c8-48b7-bccf-8332ef7f4515",
+      "name": "wordpress",
+      "description": "fksdlagjlasdjglkd",
+      "element": "wind"
+    }
+  ],
+  "filters": [
+    {
+      "name": "all",
+      "className": "btn btn-outline-dark",
+      "label": "Все"
+    },
+    {
+      "name": "fire",
+      "className": "btn btn-outline-danger",
+      "label": "Огонь"
+    },
+    {
+      "name": "water",
+      "className": "btn btn-outline-primary",
+      "label": "Вода"
+    },
+    {
+      "name": "wind",
+      "className": "btn btn-outline-success",
+      "label": "Ветер"
+    },
+    {
+      "name": "earth",
+      "className": "btn btn-outline-secondary",
+      "label": "Земля"
+    }
+  ]
+}
