@@ -5,11 +5,7 @@
 // Изменять json-файл для удобства МОЖНО!
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
-import {
-  filtersFetching,
-  filtersFetched,
-  filtersFetchingError,
-} from "../../actions";
+import { filtersFetched, fetchingFilters } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useHttp } from "../../hooks/http.hook";
@@ -23,10 +19,11 @@ const HeroesFilters = () => {
   );
 
   useEffect(() => {
-    dispatch(filtersFetching());
-    request("http://localhost:3001/filters")
-      .then((data) => dispatch(filtersFetched(data)))
-      .catch(dispatch(filtersFetchingError()));
+    dispatch(fetchingFilters(request)); // TEST on reduxthunk in react store ,to dispatch function given as an argument
+    // dispatch(filtersFetching());
+    // request("http://localhost:3001/filters")
+    //   .then((data) => dispatch(filtersFetched(data)))
+    //   .catch(dispatch(filtersFetchingError()));
     // eslint-disable-next-line
   }, []);
   const createBtnsGroup = (list) => {

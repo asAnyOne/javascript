@@ -11,11 +11,6 @@ import {
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from "../spinner/Spinner";
 
-// Задача для этого компонента:
-// При клике на "крестик" идет удаление персонажа из общего состояния
-// Усложненная задача:
-// Удаление идет и с json файла при помощи метода DELETE
-
 const HeroesList = () => {
   const { heroes, heroesLoadingStatus } = useSelector((state) => state.heroes);
   const { activeClass } = useSelector((state) => state.filters);
@@ -24,7 +19,8 @@ const HeroesList = () => {
   const { request } = useHttp();
 
   useEffect(() => {
-    dispatch("HEROES_FETCHING"); // TEST on enhancer in react store ,to dispatch "HEROES_FETCHING" given as an argument , instead heroesFetching()
+    // dispatch("HEROES_FETCHING"); // TEST on enhancer in react store ,to dispatch "HEROES_FETCHING" given as an argument , instead heroesFetching()
+    dispatch(heroesFetching); // TEST on reduxthunk in react store ,to dispatch function given as an argument , instead heroesFetching()
     request("http://localhost:3001/heroes")
       .then((data) => dispatch(heroesFetched(data)))
       .catch(() => dispatch(heroesFetchingError()));
