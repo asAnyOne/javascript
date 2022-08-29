@@ -28,7 +28,7 @@ function form() {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify(obj),
+        body: JSON.stringify(),
       })
         .then((data) => data.text())
         .then((data) => {
