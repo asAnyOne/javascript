@@ -2,7 +2,12 @@ import { useHttp } from "../../hooks/http.hook";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { heroesFetching, heroesFetched, heroesFetchingError, heroDeleted } from "../../actions";
+import {
+  heroesFetching,
+  heroesFetched,
+  heroesFetchingError,
+  heroDeleted,
+} from "../../actions";
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from "../spinner/Spinner";
 
@@ -12,24 +17,20 @@ import Spinner from "../spinner/Spinner";
 // Удаление идет и с json файла при помощи метода DELETE
 
 const HeroesList = () => {
-  const { heroes, heroesLoadingStatus, filtered } = useSelector((state) => state);
+  const { heroes, heroesLoadingStatus } = useSelector((state) => state.heroes);
+  const { activeClass } = useSelector((state) => state.filters);
+
   const dispatch = useDispatch();
   const { request } = useHttp();
 
   useEffect(() => {
-    dispatch(heroesFetching());
+    dispatch("HEROES_FETCHING"); // TEST on enhancer in react store ,to dispatch "HEROES_FETCHING" given as an argument , instead heroesFetching()
     request("http://localhost:3001/heroes")
       .then((data) => dispatch(heroesFetched(data)))
       .catch(() => dispatch(heroesFetchingError()));
 
     // eslint-disable-next-line
   }, []);
-
-  if (heroesLoadingStatus === "loading") {
-    return <Spinner />;
-  } else if (heroesLoadingStatus === "error") {
-    return <h5 className="text-center mt-5">Ошибка загрузки</h5>;
-  }
 
   const onDelete = (id) => {
     request(`http://localhost:3001/heroes/${id}`, "DELETE")
@@ -43,12 +44,26 @@ const HeroesList = () => {
     }
 
     return arr.map(({ id, ...props }) => {
-      return <HeroesListItem key={id} {...props} onDelete={() => onDelete(id)} />;
+      return (
+        <HeroesListItem key={id} {...props} onDelete={() => onDelete(id)} />
+      );
     });
   };
 
-  const elements = renderHeroesList(filtered.length ? filtered : heroes);
-  return <ul>{elements}</ul>;
+  const filteredHeroes = () => {
+    return activeClass === "all"
+      ? heroes
+      : heroes.filter((hero) => hero.element === activeClass);
+  };
+
+  const elements = renderHeroesList(filteredHeroes());
+
+  return (
+    (heroesLoadingStatus === "loading" && <Spinner />) ||
+    (heroesLoadingStatus === "error" && (
+      <h5 className="text-center mt-5">Ошибка загрузки</h5>
+    )) || <ul>{elements}</ul>
+  );
 };
 
 export default HeroesList;

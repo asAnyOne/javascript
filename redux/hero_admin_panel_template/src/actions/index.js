@@ -16,6 +16,29 @@ export const heroesFetchingError = () => {
     type: "HEROES_FETCHING_ERROR",
   };
 };
+export const filtersFetching = () => {
+  return {
+    type: "FILTERS_FETCHING",
+  };
+};
+
+export const filtersFetched = (filters, active = "all") => {
+  return {
+    type: "FILTERS_FETCHED",
+    payload: filters,
+    active,
+  };
+};
+
+export const filtersFetchingError = () => {
+  return {
+    type: "FILTERS_FETCHING_ERROR",
+  };
+};
+export const filterHeroes = (name) => ({
+  type: "HEROES_ELEMENT",
+  payload: name,
+});
 export const heroCreated = (hero) => {
   return {
     type: "HERO_CREATED",
@@ -28,8 +51,3 @@ export const heroDeleted = (id) => {
     payload: id,
   };
 };
-export const elementWater = () => ({ type: "ELEMENT_WATER" });
-export const elementWind = () => ({ type: "ELEMENT_WIND" });
-export const elementEarth = () => ({ type: "ELEMENT_EARTH" });
-export const elementFire = () => ({ type: "ELEMENT_FIRE" });
-export const elementAll = () => ({ type: "ELEMENT_ALL" });

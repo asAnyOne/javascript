@@ -5,18 +5,44 @@
 // Изменять json-файл для удобства МОЖНО!
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
-import { elementWater, elementWind, elementAll, elementEarth, elementFire } from "../../actions";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
+import {
+  filtersFetching,
+  filtersFetched,
+  filtersFetchingError,
+} from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useHttp } from "../../hooks/http.hook";
+import Spinner from "../spinner/Spinner";
 
 const HeroesFilters = () => {
+  const { request } = useHttp();
   const dispatch = useDispatch();
-  const [active, setActive] = useState({ all: true });
-  const { all, fire, water, wind, earth } = active;
+  const { activeClass, filtersLoadingStatus, filtered } = useSelector(
+    (state) => state.filters
+  );
 
-  const onFilter = (index, action) => {
-    dispatch(action());
-    setActive({ [index]: true });
+  useEffect(() => {
+    dispatch(filtersFetching());
+    request("http://localhost:3001/filters")
+      .then((data) => dispatch(filtersFetched(data)))
+      .catch(dispatch(filtersFetchingError()));
+    // eslint-disable-next-line
+  }, []);
+  const createBtnsGroup = (list) => {
+    return list.map(({ name, label, className }, i) => {
+      return (
+        <button
+          className={`${className} ${activeClass === name && "active"}`}
+          onClick={() =>
+            name !== activeClass && dispatch(filtersFetched(filtered, name))
+          }
+          key={i}
+        >
+          {label}
+        </button>
+      );
+    });
   };
 
   return (
@@ -24,33 +50,8 @@ const HeroesFilters = () => {
       <div className="card-body">
         <p className="card-text">Отфильтруйте героев по элементам</p>
         <div className="btn-group">
-          <button className={`btn btn-outline-dark ${all && "active"}`} onClick={() => onFilter("all", elementAll)}>
-            Все
-          </button>
-          <button
-            className={`btn btn-outline-danger ${fire && "active"}`}
-            onClick={() => onFilter("fire", elementFire)}
-          >
-            Огонь
-          </button>
-          <button
-            className={`btn btn-outline-primary  ${water && "active"}`}
-            onClick={() => onFilter("water", elementWater)}
-          >
-            Вода
-          </button>
-          <button
-            className={`btn btn-outline-success  ${wind && "active"}`}
-            onClick={() => onFilter("wind", elementWind)}
-          >
-            Ветер
-          </button>
-          <button
-            className={`btn btn-outline-secondary  ${earth && "active"}`}
-            onClick={() => onFilter("earth", elementEarth)}
-          >
-            Земля
-          </button>
+          {(filtersLoadingStatus === "loading" && <Spinner />) ||
+            createBtnsGroup(filtered)}
         </div>
       </div>
     </div>
