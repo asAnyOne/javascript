@@ -2,10 +2,9 @@ import { useHttp } from "../../hooks/http.hook";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { heroDeleted } from "./heroesSlice";
+import { fetchHeroes, heroDeleted } from "./heroesSlice";
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from "../spinner/Spinner";
-import { fetchingHeroes } from "../../actions";
 
 const HeroesList = () => {
   const { heroes, heroesLoadingStatus } = useSelector((state) => state.heroes);
@@ -15,7 +14,7 @@ const HeroesList = () => {
   const { request } = useHttp();
 
   useEffect(() => {
-    dispatch(fetchingHeroes(request));
+    dispatch(fetchHeroes());
     // eslint-disable-next-line
   }, []);
 
