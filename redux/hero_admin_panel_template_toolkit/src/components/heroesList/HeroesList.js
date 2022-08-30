@@ -1,14 +1,27 @@
 import { useHttp } from "../../hooks/http.hook";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { createSelector } from "@reduxjs/toolkit";
 
-import { fetchHeroes, heroDeleted } from "./heroesSlice";
+import { fetchHeroes, heroDeleted, selectAll } from "./heroesSlice";
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from "../spinner/Spinner";
 
+const filteredHeroesSelector = createSelector(
+  (state) => state.filters.activeClass,
+  selectAll,
+  (activeClass, heroes) => {
+    return activeClass === "all"
+      ? heroes
+      : heroes.filter((hero) => hero.element === activeClass);
+  }
+);
+
 const HeroesList = () => {
-  const { heroes, heroesLoadingStatus } = useSelector((state) => state.heroes);
-  const { activeClass } = useSelector((state) => state.filters);
+  const heroesLoadingStatus = useSelector(
+    (state) => state.heroes.heroesLoadingStatus
+  );
+  const filteredHeroes = useSelector(filteredHeroesSelector);
 
   const dispatch = useDispatch();
   const { request } = useHttp();
@@ -36,13 +49,7 @@ const HeroesList = () => {
     });
   };
 
-  const filteredHeroes = () => {
-    return activeClass === "all"
-      ? heroes
-      : heroes.filter((hero) => hero.element === activeClass);
-  };
-
-  const elements = renderHeroesList(filteredHeroes());
+  const elements = renderHeroesList(filteredHeroes);
 
   return (
     (heroesLoadingStatus === "loading" && <Spinner />) ||

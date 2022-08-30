@@ -1,4 +1,4 @@
-import { filtersActive, fetchFilters } from "./filtersSlice";
+import { filtersActive, fetchFilters, selectAll } from "./filtersSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
@@ -6,9 +6,11 @@ import Spinner from "../spinner/Spinner";
 
 const HeroesFilters = () => {
   const dispatch = useDispatch();
-  const { activeClass, filtersLoadingStatus, filtered } = useSelector(
+  const { activeClass, filtersLoadingStatus } = useSelector(
     (state) => state.filters
   );
+  const filtered = useSelector(selectAll);
+
   useEffect(() => {
     dispatch(fetchFilters());
     // eslint-disable-next-line react-hooks/exhaustive-deps
