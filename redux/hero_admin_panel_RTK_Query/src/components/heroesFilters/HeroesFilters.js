@@ -1,20 +1,13 @@
-import { filtersActive, fetchFilters, selectAll } from "./filtersSlice";
+import { filtersActive } from "./filtersSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useGetFiltersQuery } from "../api/apiSlice";
 
 import Spinner from "../spinner/Spinner";
 
 const HeroesFilters = () => {
-  const filtered = useSelector(selectAll);
-  const { activeClass, filtersLoadingStatus } = useSelector(
-    (state) => state.filters
-  );
+  const { data: filters = [], isLoading } = useGetFiltersQuery();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFilters());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const activeClass = useSelector((state) => state.filters.activeClass);
 
   const createBtnsGroup = (list) => {
     return list.map(({ name, label, className }, i) => {
@@ -35,8 +28,7 @@ const HeroesFilters = () => {
       <div className="card-body">
         <p className="card-text">Отфильтруйте героев по элементам</p>
         <div className="btn-group">
-          {(filtersLoadingStatus === "loading" && <Spinner />) ||
-            createBtnsGroup(filtered)}
+          {(isLoading && <Spinner />) || createBtnsGroup(filters)}
         </div>
       </div>
     </div>

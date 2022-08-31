@@ -1,35 +1,18 @@
 import { v4 as key } from "uuid";
-import { useHttp } from "../../hooks/http.hook";
-import { heroCreated, heroesFetchingError } from "../heroesList/heroesSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { selectAll } from "../heroesFilters/filtersSlice";
+
+import { useCreateHeroMutation } from "../api/apiSlice";
 
 const HeroesAddForm = () => {
-  const { request } = useHttp();
-  const dispatch = useDispatch();
-
-  const optionsData = useSelector(selectAll);
+  const [addHero] = useCreateHeroMutation();
   const onSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const obj = {};
     obj.id = key();
     formData.forEach((key, value) => (obj[value] = key));
-
-    request("http://localhost:3001/heroes", "POST", JSON.stringify(obj))
-      .then((hero) => dispatch(heroCreated(hero)))
-      .then(() => e.target.reset())
-      .catch(() => dispatch(heroesFetchingError()));
+    addHero(obj).unwrap();
+    e.target.reset();
   };
-  const createSelectOptions = optionsData.map(
-    ({ name, label }, i) =>
-      name !== "all" && (
-        <option value={name} key={i}>
-          {label}
-        </option>
-      )
-  );
-
   return (
     <form className="border p-4 shadow-lg rounded" onSubmit={onSubmit}>
       <div className="mb-3">
@@ -66,7 +49,10 @@ const HeroesAddForm = () => {
         </label>
         <select required className="form-select" id="element" name="element">
           <option>Я владею элементом...</option>
-          {createSelectOptions}
+          <option value="fire">Огонь</option>
+          <option value="water">Вода</option>
+          <option value="wind">Ветер</option>
+          <option value="earth">Земля</option>
         </select>
       </div>
 

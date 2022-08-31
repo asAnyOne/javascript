@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createEntityAdapter } from "@reduxjs/toolkit"; //createEntityAdapter uses for manupulate data as CRUD
 import { useHttp } from "../../hooks/http.hook";
 
 export const fetchHeroes = createAsyncThunk(
@@ -14,8 +14,15 @@ const heroesAdapter = createEntityAdapter();
 const initialState = heroesAdapter.getInitialState({
   heroesLoadingStatus: "idle",
 });
-export const { selectAll } = heroesAdapter.getSelectors(
-  (state) => state.heroes
+const { selectAll } = heroesAdapter.getSelectors((state) => state.heroes);
+export const filteredHeroesSelector = createSelector(
+  (state) => state.filters.activeClass,
+  selectAll,
+  (activeClass, heroes) => {
+    return activeClass === "all"
+      ? heroes
+      : heroes.filter((hero) => hero.element === activeClass);
+  }
 );
 
 // const initialState = {
