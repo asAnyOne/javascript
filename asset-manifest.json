@@ -1,25 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.d738bd2b.chunk.css",
-    "main.js": "/static/js/main.5035fe1a.chunk.js",
-    "main.js.map": "/static/js/main.5035fe1a.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.76f7a808.js",
-    "runtime-main.js.map": "/static/js/runtime-main.76f7a808.js.map",
-    "static/js/2.c8249cc2.chunk.js": "/static/js/2.c8249cc2.chunk.js",
-    "static/js/2.c8249cc2.chunk.js.map": "/static/js/2.c8249cc2.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.d738bd2b.chunk.css.map": "/static/css/main.d738bd2b.chunk.css.map",
-    "static/js/2.c8249cc2.chunk.js.LICENSE.txt": "/static/js/2.c8249cc2.chunk.js.LICENSE.txt",
-    "static/media/404.c83949f7.gif": "/static/media/404.c83949f7.gif",
-    "static/media/Avengers.4065c8f9.png": "/static/media/Avengers.4065c8f9.png",
-    "static/media/Avengers_logo.9eaf2193.png": "/static/media/Avengers_logo.9eaf2193.png",
-    "static/media/mjolnir.61f31e18.png": "/static/media/mjolnir.61f31e18.png",
-    "static/media/vision.067d4ae1.png": "/static/media/vision.067d4ae1.png"
+    "main.css": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/css/main.7046f75a.chunk.css",
+    "main.js": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/js/main.1cfac41b.chunk.js",
+    "main.js.map": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/js/main.1cfac41b.chunk.js.map",
+    "runtime-main.js": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/js/runtime-main.c2a97dd9.js",
+    "runtime-main.js.map": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/js/runtime-main.c2a97dd9.js.map",
+    "static/css/2.c62e3214.chunk.css": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/css/2.c62e3214.chunk.css",
+    "static/js/2.1be3c54b.chunk.js": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/js/2.1be3c54b.chunk.js",
+    "static/js/2.1be3c54b.chunk.js.map": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/js/2.1be3c54b.chunk.js.map",
+    "index.html": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/index.html",
+    "static/css/2.c62e3214.chunk.css.map": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/css/2.c62e3214.chunk.css.map",
+    "static/css/main.7046f75a.chunk.css.map": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/css/main.7046f75a.chunk.css.map",
+    "static/js/2.1be3c54b.chunk.js.LICENSE.txt": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/js/2.1be3c54b.chunk.js.LICENSE.txt",
+    "static/media/app.scss": "/asAnyOne/javascript/tree/gh-pages/redux/hero_admin_panel_RTK_Query/static/media/hero_bg.0540b794.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.76f7a808.js",
-    "static/js/2.c8249cc2.chunk.js",
-    "static/css/main.d738bd2b.chunk.css",
-    "static/js/main.5035fe1a.chunk.js"
+    "static/js/runtime-main.c2a97dd9.js",
+    "static/css/2.c62e3214.chunk.css",
+    "static/js/2.1be3c54b.chunk.js",
+    "static/css/main.7046f75a.chunk.css",
+    "static/js/main.1cfac41b.chunk.js"
   ]
 }
