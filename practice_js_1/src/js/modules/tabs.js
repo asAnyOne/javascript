@@ -2,7 +2,8 @@ const tabs = (
   tabsWrapperSelector,
   tabsSelector,
   contentSelectors,
-  activeClass
+  activeClass,
+  display = "block"
 ) => {
   const tabsWrapper = document.querySelector(tabsWrapperSelector),
     tabs = document.querySelectorAll(tabsSelector),
@@ -14,11 +15,10 @@ const tabs = (
   }
   function showContent(i = 0) {
     tabs[i].classList.add(activeClass);
-    content[i].style.display = "block";
+    content[i].style.display = display;
   }
   hideContent();
   showContent();
-  console.log("tabs");
 
   tabsWrapper.addEventListener("click", (e) => {
     if (

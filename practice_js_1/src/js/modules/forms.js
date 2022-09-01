@@ -1,4 +1,4 @@
-const forms = () => {
+const forms = (state) => {
   const form = document.querySelectorAll("form");
   const inputs = document.querySelectorAll("input");
   const inputsPhone = document.querySelectorAll("input[name=user_phone]");
@@ -37,6 +37,12 @@ const forms = () => {
       item.appendChild(status);
 
       const formData = new FormData(item);
+
+      if (item.getAttribute("data-calc") === "end") {
+        for (const key in state) {
+          formData.append(key, state[key]);
+        }
+      }
 
       postData("assets/server.php", formData)
         .then((res) => {
