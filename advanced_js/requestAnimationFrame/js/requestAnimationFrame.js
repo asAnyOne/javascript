@@ -1,5 +1,5 @@
-"use strict";
 window.addEventListener("DOMContentLoaded", () => {
+  "use strict";
   const btn = document.querySelector("button"),
     box = document.querySelector(".box");
   let x = 0;
