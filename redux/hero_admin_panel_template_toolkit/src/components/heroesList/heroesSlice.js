@@ -15,6 +15,7 @@ const initialState = heroesAdapter.getInitialState({
   heroesLoadingStatus: "idle",
 });
 const { selectAll } = heroesAdapter.getSelectors((state) => state.heroes);
+
 export const filteredHeroesSelector = createSelector(
   (state) => state.filters.activeClass,
   selectAll,
