@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API</title>
+  </head>
+  <body>
+    <h1>The api course</h1>
+    <form action="/" method="post">
+      <label for="city">City </label>
+      <input name="cityName" id="city" placeholder="London" />
+      <button type="submit">send</button>
+    </form>
+    <form action="/" method="post">
+      <label for="city">City </label>
+      <input name="cityName" id="city" placeholder="London" />
+      <button type="submit">get</button>
+    </form>
+    <!-- <script>
+      const data = async () => {
+        const res = await fetch(
+          "https://gateway.marvel.com:443/v1/public/characters/1009200?apikey=35ce66c9948b2d1e6ca91816bfbd7d29"
+        );
+
+        return await res.json();
+      };
+
+      data().then((res) => console.log(res));
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        console.dir(formData);
+      });
+    </script> -->
+  </body>
+</html>

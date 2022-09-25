@@ -1,0 +1,17 @@
+{
+  "name": "web-developer-angela_s-cours",
+  "version": "1.0.0",
+  "description": "learning webDevelopment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "superheroes": "^3.0.0"
+  },
+  "devDependencies": {
+    "json-server": "^0.17.0"
+  }
+}
