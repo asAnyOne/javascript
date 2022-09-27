@@ -36,16 +36,12 @@ const forms = (url) => {
 
       const formData = new FormData(item);
 
-      const obj = {};
-
-      formData.forEach((val, key) => {
-        obj[key] = val;
-      });
+      const obj = Object.fromEntries(formData);
 
       const { email, password } = obj;
-      console.log(email, password);
+
       const key = { basic: window.btoa(`${email}:${password}`) };
-      console.log(key);
+
       fetch("http://localhost:5000", {
         method: "POST",
         headers: {

@@ -31,12 +31,9 @@ const getData = async (data) => {
 };
 
 const postData = async (obj) => {
-  const data = {};
-  for (key in obj) {
-    if (key !== "refresh_token") {
-      data[key] = obj[key];
-    }
-  }
+  const data = Object.fromEntries(
+    Object.entries(obj).filter((arr) => arr[0] !== "refresh_token")
+  );
   const res = await axios({
     url: "https://api.stage.targemy.com/v1/comment",
     method: "POST",
