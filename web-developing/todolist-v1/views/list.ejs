@@ -1,0 +1,25 @@
+<%- include('header'); -%>
+
+    <div class="box">
+      <% for(let i=0; i < list.length; i++){ %>
+      <div class="item">
+        <input type="checkbox" />
+        <p><%=list[i]%></p>
+      </div>
+      <% } %>
+
+      <form action="/" method="post" class="item">
+        <input
+          type="text"
+          name="newItem"
+          placeholder="New Item"
+          autocomplete="off"
+        />
+        <button type="submit" name="button" value=<%= listTitle  %> >+</button>
+      </form>
+      <form action= <%=listTitle==='work'?'/':'/work'  %>  >
+        <button class="back">back to  <%=listTitle==='work'?'day':'work'  %>  list</button>
+      </form>
+    </div>
+ 
+    <%- include('footer'); -%>
