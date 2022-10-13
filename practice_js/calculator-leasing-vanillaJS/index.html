@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/slider.css" />
+		<title>calc</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			@font-face {
+				font-family: "Nekst";
+				src: url("fonts/Nekst-Black.woff") format("woff");
+				font-weight: 900;
+			}
+			@font-face {
+				font-family: "Gilroy";
+				src: url("fonts/Gilroy-Regular.woff") format("woff");
+				font-weight: 400;
+			}
+			.container {
+				max-width: 1440px;
+				margin: 0 auto;
+			}
+			form {
+				font-family: "Nekst";
+				font-weight: 900;
+				color: #575757;
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				padding: 213px 47px;
+			}
+			.calc-title {
+				width: 100%;
+				display: flex;
+			}
+			.calc-title__text {
+				flex: 1;
+				font-size: 54px;
+				line-height: 50px;
+				color: black;
+				margin-bottom: 32px;
+			}
+			.calc-data {
+				display: flex;
+				column-gap: 32px;
+				width: 100%;
+				margin-bottom: 45px;
+			}
+
+			.calc-data__item {
+				flex: 1;
+			}
+
+			.calc-data__title,
+			.calc-result__title {
+				font-family: "Gilroy";
+				font-style: normal;
+				font-weight: 400;
+				font-size: 16px;
+				line-height: 20px;
+				margin-bottom: 25px;
+			}
+			.input-row {
+				display: flex;
+				align-items: center;
+				column-gap: 20px;
+				background: #f3f3f4;
+				border-radius: 16px;
+			}
+			.calc-data__input {
+				width: 100%;
+				font-family: "Nekst";
+				font-size: 30px;
+				line-height: 36px;
+				color: inherit;
+				padding: 16px 24px;
+				background: #f3f3f4;
+				border: none;
+				border-top-left-radius: 16px;
+				border-bottom-left-radius: 16px;
+			}
+			.calc-data__input:focus {
+				outline: none;
+			}
+
+			.input-row__index {
+				font-size: 30px;
+				line-height: 120%;
+			}
+			.input-row__prog {
+				font-size: 20px;
+				line-height: 120%;
+			}
+
+			.calc-result {
+				display: flex;
+				align-items: center;
+				width: 100%;
+				column-gap: 32px;
+			}
+			.calc-result__title {
+				margin-bottom: 8px;
+			}
+			.calc-result__item {
+				flex: 1;
+			}
+			.calc-result__num {
+				font-family: "Nekst";
+				font-size: 54px;
+				line-height: 90%;
+			}
+			.calc-result__button {
+				width: 100%;
+				background: #ff9514;
+				border-radius: 40px;
+				font-family: "Nekst";
+				font-style: normal;
+				font-weight: 900;
+				font-size: 30px;
+				line-height: 36px;
+				color: #ffffff;
+				padding: 16px;
+				border: none;
+			}
+		</style>
+	</head>
+	<body>
+		<section class="calc">
+			<div class="container">
+				<form>
+					<div class="calc-title">
+						<h2 class="calc-title__text">
+							Рассчитайте стоимость автомобиля в лизинг
+						</h2>
+						<h2 class="calc-title__text"></h2>
+					</div>
+					<div class="calc-data">
+						<div class="calc-data__item">
+							<div class="calc-data__title">
+								Стоимость автомобиля
+							</div>
+							<div class="input-row">
+								<input
+									class="calc-data__input"
+									type="text"
+									data-min="1000000"
+									data-max="6000000"
+									value="1000000"
+									name="carPrice"
+								/>
+								<div class="input-row__index">₽</div>
+							</div>
+							<input
+								type="range"
+								id="carPrice"
+								value="70"
+								data-min="0"
+								data-max="100"
+							/>
+						</div>
+						<div class="calc-data__item">
+							<div class="calc-data__title">
+								Первоначальный взнос
+							</div>
+							<div class="input-row">
+								<input
+									class="calc-data__input"
+									type="text"
+									data-min="0"
+									data-max="100"
+									value="70"
+									name="initial"
+								/>
+								<div class="input-row__prog">13%</div>
+							</div>
+							<input
+								type="range"
+								value="70"
+								data-min="0"
+								data-max="100"
+								id="rangeInit"
+							/>
+						</div>
+						<div class="calc-data__item">
+							<div class="calc-data__title">Срок лизинга</div>
+							<div class="input-row">
+								<input
+									class="calc-data__input"
+									type="text"
+									data-min="0"
+									data-max="100"
+									value="70"
+									name="leaseTime"
+								/>
+								<div class="input-row__index">мес.</div>
+							</div>
+							<input
+								type="range"
+								value="70"
+								data-min="0"
+								data-max="100"
+								id="leaseTimeRange"
+							/>
+						</div>
+					</div>
+					<div class="calc-result">
+						<div class="calc-result__item">
+							<div class="calc-result__title">
+								Сумма договора лизинга
+							</div>
+							<div class="calc-result__num">4 467 313 ₽</div>
+						</div>
+						<div class="calc-result__item">
+							<div class="calc-result__title">
+								Ежемесячный платеж от
+							</div>
+							<div class="calc-result__num">114 455 ₽</div>
+						</div>
+						<div class="calc-result__item">
+							<button class="calc-result__button" type="submit">
+								Оставить заявку
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+		<script src="js/slider.js"></script>
+	</body>
+</html>
