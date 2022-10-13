@@ -1,0 +1,8 @@
+
+views/partials/header.ejs
+views/partials/footer.ejs
+views/home.ejs
+views/login.ejs
+views/register.ejs
+views/secret.ejs
+views/submit.ejs
